@@ -11,7 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText,
 } from 'reactstrap';
 
 const HeaderNav = (props) => {
@@ -55,6 +55,6 @@ const HeaderNav = (props) => {
       </Navbar>
     </div>
   );
-}
+};
 
 export default HeaderNav;

@@ -12,7 +12,7 @@ const Index = () => {
 
       Hello Next.js
     </div>
-  )
-}
+  );
+};
 
 export default Index;
