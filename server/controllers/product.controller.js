@@ -16,7 +16,7 @@ exports.productCreate = (req, res, next) => {
     }
 
     res.send({
-      message: 'Product successfully created',
+      message: 'Product successfully created!!',
       data: newProduct,
     });
   });
