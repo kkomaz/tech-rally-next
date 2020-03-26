@@ -15,3 +15,8 @@ $link-color: $purple;
 
 // Button styles
 @import 'stylesheets/_button.scss';
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #fafbfc;
+}

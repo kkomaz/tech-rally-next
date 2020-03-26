@@ -1,6 +1,6 @@
 import App from 'next/app'
 import Head from 'next/head';
-import './App.scss';
+import './_app.scss';
 
 class MyApp extends App {
   render() {

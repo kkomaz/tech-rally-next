@@ -2,6 +2,10 @@
   color: white;
 }
 
+.btn-primary {
+  background-image: linear-gradient(to right, $purple, #6c7ce2, #5393eb, #4aa7ed, $lake);
+}
+
 .btn-link {
   color: $purple;
 }
