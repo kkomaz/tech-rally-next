@@ -4,6 +4,16 @@ exports.test = (req, res) => {
   res.send('Greetings from the Test Controller!');
 };
 
+exports.productList = (req, res, next) => {
+  Product.find({}, (err, products) => {
+    if (err) return next(err);
+
+    res.send({
+      data: products,
+    });
+  });
+};
+
 exports.productCreate = (req, res, next) => {
   const product = new Product({
     name: req.body.name,
