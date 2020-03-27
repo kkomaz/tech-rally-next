@@ -8,9 +8,7 @@ exports.productList = (req, res, next) => {
   Product.find({}, (err, products) => {
     if (err) return next(err);
 
-    res.send({
-      data: products,
-    });
+    res.send({ products });
   });
 };
 
