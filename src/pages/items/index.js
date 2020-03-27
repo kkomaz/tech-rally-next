@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 import Link from 'next/link';
 import axios from 'axios';
 
-function ItemsPage(props) {
+function ItemsPage (props) {
   const { products } = props.pageProps;
 
   return (
@@ -14,7 +14,11 @@ function ItemsPage(props) {
       </Link>
       <ul>
         {products.map((product) => (
-          <li>{product.name}</li>
+          <Link href={`/items/${product._id}`}>
+            <li>
+              <Button color="link">{product.name}</Button>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>

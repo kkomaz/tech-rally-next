@@ -3,5 +3,6 @@ module.exports = {
   "singleQuote": true,
   "trailingComma": "es5",
   "jsxSingleQuote": false,
-  "semi": true
+  "semi": true,
+  "arrowParens": "always"
 }
