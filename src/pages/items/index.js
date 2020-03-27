@@ -4,7 +4,7 @@ import Link from 'next/link';
 import axios from 'axios';
 
 function ItemsPage (props) {
-  const { products } = props.pageProps;
+  const { products } = props;
 
   return (
     <div>

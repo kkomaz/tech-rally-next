@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-function ItemPage({ pageProps }) {
-  const { product } = pageProps;
+function ItemPage(props) {
+  const { product } = props;
 
   return (
     <div>
