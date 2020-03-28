@@ -1,11 +1,9 @@
-import HeaderNav from 'components/HeaderNav';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 
 const Index = () => {
   return (
     <div>
-      <HeaderNav />
       <Button color="primary">primary</Button>
       <Button color="info">info</Button>
       <Button color="secondary">secondary</Button>
