@@ -22,6 +22,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',
+    'react/forbid-prop-types': 'off',
     'object-curly-newline': 'off',
     'no-underscore-dangle': 'off',
     "jsx-a11y/href-no-hash": ["off"],
