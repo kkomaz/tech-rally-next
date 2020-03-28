@@ -1,20 +1,14 @@
-$ocean: #5680E9;
-$river: #84CEEB;
-$lake: #5AB9EA;
-$shadow: #C1C8E4;
-$purple: #8860D0;
-$snow: #FFFAFA;
-
-$primary: $lake;
-$secondary: $shadow;
-$info: $ocean;
-$link-color: $purple;
+// Utility
+@import 'stylesheets/utility/_variables.scss';
+@import 'stylesheets/utility/_spacing.scss';
+@import 'stylesheets/utility/_typography.scss';
 
 // https://reactstrap.github.io/
 @import "bootstrap/scss/bootstrap.scss";
 
-// Button styles
-@import 'stylesheets/_button.scss';
+// Modules styles
+@import 'stylesheets/modules/_button.scss';
+@import 'stylesheets/modules/_nav.scss';
 
 body {
   font-family: 'Raleway', sans-serif;

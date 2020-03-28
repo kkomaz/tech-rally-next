@@ -1,0 +1,11 @@
+.bg-light {
+  background: $river !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $snow;
+
+  &:hover {
+    color: $purple;
+  }
+}
