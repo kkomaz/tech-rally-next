@@ -37,6 +37,11 @@ const HeaderNav = () => {
               </Link>
             </NavItem>
             <NavItem className="mr-one">
+              <Link href="/products">
+              <NavLink>Courses</NavLink>
+              </Link>
+            </NavItem>
+            <NavItem className="mr-one">
               <Link href="/sign-in">
               <NavLink>Sign In</NavLink>
               </Link>

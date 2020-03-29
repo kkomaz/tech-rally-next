@@ -26,7 +26,7 @@ const Index = () => {
                 </h4>
               </div>
               <Button color="primary" size="lg">
-                Join Now
+                Browse My Courses
               </Button>
             </Col>
             <Col sm={12} md={6}>
