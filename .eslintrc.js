@@ -19,6 +19,7 @@ module.exports = {
     }
   },
   "rules": {
+    "prettier/prettier": 'off',
     'arrow-body-style': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',

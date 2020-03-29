@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Button,
   Collapse,
@@ -19,18 +20,22 @@ const HeaderNav = () => {
   return (
     <div className={styles.containerBackground}>
       <Navbar className="container" color="light" light expand="md">
-        <NavbarBrand href="/">techrally.me</NavbarBrand>
+        <Link href="/">
+          <NavbarBrand>techrally.me</NavbarBrand>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem className="mr-one">
-              <NavLink href="/components/">Components</NavLink>
+              <Link href="/sign-in">
+              <NavLink>Sign In</NavLink>
+              </Link>
             </NavItem>
             <NavItem className="mr-one">
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
             <NavItem>
-              <Button color="primary">Join Now</Button>
+              <Button color="primary">Login</Button>
             </NavItem>
           </Nav>
         </Collapse>

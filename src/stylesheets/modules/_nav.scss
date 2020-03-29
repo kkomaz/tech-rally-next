@@ -2,6 +2,14 @@
   background: $shadow !important;
 }
 
+.nav-link {
+  cursor: pointer;
+}
+
+.navbar-brand {
+  cursor: pointer;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: $snow;
 
