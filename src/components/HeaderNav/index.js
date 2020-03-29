@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useMediaQuery } from 'react-responsive'
+import classNames from 'classnames';
+import useResponsive from 'utils/responsive/useResponsive';
 import {
   Collapse,
   Navbar,
@@ -14,13 +15,15 @@ import styles from './_header-nav.module.scss';
 
 const HeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+  const { isDesktop } = useResponsive();
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div className={styles.containerBackground}>
-      <Navbar className={isDesktop ? 'container' : ''} color="light" light expand="md">
+      <Navbar className={classNames({
+        'container': isDesktop,
+      })} color="light" light expand="md">
         <Link href="/">
           <NavbarBrand>techrally.me</NavbarBrand>
         </Link>
