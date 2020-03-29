@@ -2,7 +2,7 @@ import HeaderNav from 'components/HeaderNav';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 import axios from 'axios';
-import config from 'config';
+import config from 'utils/config';
 
 function ItemsPage (props) {
   const { products } = props;
