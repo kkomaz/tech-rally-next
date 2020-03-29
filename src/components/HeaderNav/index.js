@@ -27,15 +27,19 @@ const HeaderNav = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem className="mr-one">
-              <Link href="/sign-in">
-              <NavLink>Sign In</NavLink>
+              <Link href="/products">
+              <NavLink>Products</NavLink>
               </Link>
             </NavItem>
             <NavItem className="mr-one">
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <Link href="/items">
+              <NavLink>Items</NavLink>
+              </Link>
             </NavItem>
-            <NavItem>
-              <Button color="primary">Login</Button>
+            <NavItem className="mr-one">
+              <Link href="/sign-in">
+              <NavLink>Sign In</NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>

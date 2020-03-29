@@ -1,5 +1,5 @@
 .bg-light {
-  background: $shadow !important;
+  background: $snow !important;
 }
 
 .nav-link {
@@ -11,9 +11,9 @@
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: $snow;
+  color: $ocean;
 
   &:hover {
-    color: $purple;
+    color: $shadow;
   }
 }

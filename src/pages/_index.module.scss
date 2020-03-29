@@ -1,0 +1,24 @@
+@import 'stylesheets/utility/_variables.scss';
+
+// Section Page
+.sectionPage {
+  padding: 80px 40px;
+}
+
+.section {
+  display: flex;
+}
+
+.sectionImage {
+  width: 100%;
+}
+
+.sectionSecondaryText {
+  color: $purple;
+}
+
+// blogs
+.blogSection {
+  padding: 80px 40px;
+  background: $shadow;
+}

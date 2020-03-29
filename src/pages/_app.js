@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
         <title>Thoughts!</title>
       </Head>
       <HeaderNav />
-      <div className="body container">
+      <div className="body">
         <Component {...pageProps} />
       </div>
     </>
