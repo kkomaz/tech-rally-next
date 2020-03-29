@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from 'config';
 
 function ItemPage(props) {
   const { product } = props;
@@ -12,7 +13,7 @@ function ItemPage(props) {
 }
 
 export const getStaticPaths = async () => {
-  const { data } = await axios.get('http://localhost:3000/api/products');
+  const { data } = await axios.get(`${config.API_URL}/api/products`);
 
   const paths = data.products.map((product) => ({
     params: { id: product._id },
@@ -25,7 +26,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { data } = await axios.get(`http://localhost:3000/api/products/${params.id}`);
+  const { data } = await axios.get(`${config.API_URL}/api/products/${params.id}`);
 
   return {
     props: {

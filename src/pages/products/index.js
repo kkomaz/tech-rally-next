@@ -4,12 +4,13 @@ import HeaderNav from 'components/HeaderNav';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 import axios from 'axios';
+import config from 'config';
 
 function ProductsPage(props) {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-    const { data } = await axios.get('http://localhost:3000/api/products');
+    const { data } = await axios.get(`${config.API_URL}/api/products`);
     setProducts(data.products);
   };
 
@@ -44,7 +45,7 @@ ProductsPage.getInitialProps = async ({ req }) => {
   const isServer = !!req;
 
   if (isServer) {
-    const { data } = await axios.get('http://localhost:3000/api/products');
+    const { data } = await axios.get(`${config.API_URL}/api/products`);
     return { products: data.products };
   }
 
@@ -52,7 +53,7 @@ ProductsPage.getInitialProps = async ({ req }) => {
 };
 
 // export const getServerSideProps = async () => {
-//   const { data } = await axios.get('http://localhost:3000/api/products');
+//   const { data } = await axios.get(`${config.API_URL}/api/products`);
 
 //   console.log(data);
 

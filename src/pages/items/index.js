@@ -2,6 +2,7 @@ import HeaderNav from 'components/HeaderNav';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 import axios from 'axios';
+import config from 'config';
 
 function ItemsPage (props) {
   const { products } = props;
@@ -26,7 +27,7 @@ function ItemsPage (props) {
 }
 
 export const getStaticProps = async () => {
-  const { data } = await axios.get('http://localhost:3000/api/products');
+  const { data } = await axios.get(`${config.API_URL}/api/products`);
 
   return {
     props: {
