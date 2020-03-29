@@ -17,8 +17,48 @@
   color: $purple;
 }
 
+.sectionMainText {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 1em;
+
+  @media only screen and (min-width: 767px) {
+    font-size: 2.25rem;
+    margin-bottom: 1em;
+    text-align: left;
+    margin-top: 0;
+  }
+}
+
+.sectionSecondaryText {
+  font-size: 0.9rem;
+  text-align: center;
+
+  @media only screen and (min-width: 767px) {
+    font-size: 1.35rem;
+    text-align: left;
+  }
+}
+
+.mobileSectionBrowse {
+  display: flex;
+  justify-content: center;
+}
+
 // blogs
 .blogSection {
   padding: 80px 40px;
   background: $shadow;
+}
+
+@media only screen and (min-width: 480px) {
+  .test {
+    color: red;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .test {
+    color: blue;
+  }
 }

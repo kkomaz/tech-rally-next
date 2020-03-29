@@ -1,7 +1,9 @@
 import { Row, Col, Button } from 'reactstrap';
 import classNames from 'classnames/bind';
+import { Mobile, Desktop } from 'components/Responsive';
 import landPageSvg from '../assets/svg/landing-page-section.svg';
 import styles from './_index.module.scss';
+// https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
 
 const cx = classNames.bind(styles);
 
@@ -11,30 +13,33 @@ const Index = () => {
       <div className={styles.sectionPage}>
         <div className="container">
           <Row>
-            <Col sm={12} md={6}>
+            <Col xs={{ size: 12, order: 2 }} md={{ size: 6, order: 1 }}>
               <div>
-                <h1 className="mb-one">
+                <h1 className={styles.sectionMainText}>
                   A one stop shop to learning the newest web technologies.
                 </h1>
                 <h4
                   className={cx({
                     sectionSecondaryText: true,
-                    'mb-one': true
+                    'mb-one': true,
                   })}
                 >
                   Learning how to code has never been easier.
                 </h4>
               </div>
-              <Button color="primary" size="lg">
-                Browse My Courses
-              </Button>
+              <Mobile>
+                <div className={styles.mobileSectionBrowse}>
+                  <Button color="primary">Browse My Courses</Button>
+                </div>
+              </Mobile>
+              <Desktop>
+                <Button color="primary" size="lg">
+                  Browse My Courses
+                </Button>
+              </Desktop>
             </Col>
-            <Col sm={12} md={6}>
-              <img
-                className={styles.sectionImage}
-                alt="img"
-                src={landPageSvg}
-              />
+            <Col xs={{ size: 12, order: 1 }} md={{ size: 6, order: 2 }}>
+              <img className={styles.sectionImage} alt="img" src={landPageSvg} />
             </Col>
           </Row>
         </div>
@@ -44,7 +49,7 @@ const Index = () => {
           <Row>
             <Col sm={12} md={6}>
               <div>
-                <h1 className="mb-one">
+                <h1>
                   A one stop shop to learning the newest web technologies.
                 </h1>
                 <h4 className={styles.sectionSecondaryText}>
