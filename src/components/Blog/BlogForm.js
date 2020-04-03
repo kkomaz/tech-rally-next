@@ -15,12 +15,38 @@ import { SubmitWrapper } from 'components/Form';
 import { Formik, Field, Form } from 'formik';
 
 function BlogForm(props) {
+  const onSubmit = (values, options) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      options.setSubmitting(false);
+    }, 400);
+  };
+
+  const onCancel = () => {
+    console.log('canceling');
+  }
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = 'Invalid email address';
+    }
+    return errors;
+  };
+
   return (
     <Row>
       <Col lg={{ size: 6, offset: 3 }} sm={{ size: 8, offset: 2 }}>
         <Card style={{ maxWidth: '800px' }} body>
           <CardTitle className="text-center">Create Blog</CardTitle>
-          <Formik>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={validate}
+            onSubmit={onSubmit}
+            validateOnChange={false}
+          >
             {({ errors, isSubmitting }) => {
               return (
                 <Form>
@@ -63,7 +89,11 @@ function BlogForm(props) {
                     <FormFeedback>{errors.description}</FormFeedback>
                   </FormGroup>
                   <FormGroup>
-                    <SubmitWrapper />
+                    <SubmitWrapper
+                      onSubmit={onSubmit}
+                      onCancel={onCancel}
+                      isSubmitting={isSubmitting}
+                    />
                   </FormGroup>
                 </Form>
               );
