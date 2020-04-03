@@ -35,7 +35,7 @@ const HeaderNav = () => {
             </NavItem>
             <NavItem className="mr-one">
               <Link href="/blogs">
-              <NavLink>Blog</NavLink>
+              <NavLink>Blogs</NavLink>
               </Link>
             </NavItem>
             <NavItem className="mr-one">

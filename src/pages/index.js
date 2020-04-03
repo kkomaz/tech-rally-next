@@ -1,6 +1,6 @@
 import { Row, Col, Button } from 'reactstrap';
 import classNames from 'classnames/bind';
-import useResponsive from 'utils/responsive/useResponsive';
+import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import landPageSvg from '../assets/svg/landing-page-section.svg';
 import styles from './_index.module.scss';
 // https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
@@ -8,7 +8,7 @@ import styles from './_index.module.scss';
 const cx = classNames.bind(styles);
 
 const Index = () => {
-  const { isLg } = useResponsive();
+  const { isMdLayout } = useResponsiveLayout();
 
   return (
     <>
@@ -30,7 +30,7 @@ const Index = () => {
                 </h4>
               </div>
               {
-                isLg ?
+                isMdLayout ?
                 <Button color="primary" size="lg">
                   Browse My Courses
                 </Button> :

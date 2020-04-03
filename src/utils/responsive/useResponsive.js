@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-function useResponsive() {
+function useResponsiveClass() {
   const [isClient, setIsClient] = useState(false);
 
-  const isXs = useMediaQuery({
+  const isXsClass = useMediaQuery({
     minWidth: 0,
     maxWidth: 576,
   });
 
-  const isSm = useMediaQuery({
-    minWidth: 577,
-    // maxWidth: 767,
+  const isSmClass = useMediaQuery({
+    // minWidth: 577,
+    maxWidth: 767,
   });
 
-  const isMd = useMediaQuery({
+  const isMdClass = useMediaQuery({
     minWidth: 768,
     // maxWidth: 991,
   });
 
-  const isLg = useMediaQuery({
+  const isLgClass = useMediaQuery({
     minWidth: 992,
   });
 
@@ -28,11 +28,11 @@ function useResponsive() {
   }, []);
 
   return {
-    isLg: isClient ? isLg : true,
-    isXs: isClient ? isXs : false,
-    isSm: isClient ? isSm : false,
-    isMd: isClient ? isMd : false,
+    isXsClass: isClient ? isXsClass : false,
+    isSmClass: isClient ? isSmClass : false,
+    isMdClass: isClient ? isMdClass : false,
+    isLgClass: isClient ? isLgClass : true,
   };
 }
 
-export default useResponsive;
+export default useResponsiveClass;

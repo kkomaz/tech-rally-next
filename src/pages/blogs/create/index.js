@@ -1,7 +1,9 @@
+import { BlogForm } from 'components/Blog';
+
 function BlogsCreatePage() {
   return (
     <div className="container">
-      BlogsCreatePage
+      <BlogForm />
     </div>
   )
 }
