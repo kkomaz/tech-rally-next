@@ -8,7 +8,7 @@ import styles from './_index.module.scss';
 const cx = classNames.bind(styles);
 
 const Index = () => {
-  const { isDesktop } = useResponsive();
+  const { isLg } = useResponsive();
 
   return (
     <>
@@ -30,7 +30,7 @@ const Index = () => {
                 </h4>
               </div>
               {
-                isDesktop ?
+                isLg ?
                 <Button color="primary" size="lg">
                   Browse My Courses
                 </Button> :

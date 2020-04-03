@@ -18,11 +18,17 @@
 //   .then(response => response.text())
 //   .then(result => console.log(result))
 //   .catch(error => console.log('error', error));
+import { Button } from 'reactstrap';
+import Link from 'next/link';
 
 function BlogsPage() {
   return (
-    <div>
-      Blogs Page
+    <div className="container">
+      <Link href="/blogs/create">
+        <Button color="primary">
+          Create Blog
+        </Button>
+      </Link>
     </div>
   )
 }

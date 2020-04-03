@@ -4,12 +4,23 @@ import { useMediaQuery } from 'react-responsive';
 function useResponsive() {
   const [isClient, setIsClient] = useState(false);
 
-  const isMobile = useMediaQuery({
-    maxWidth: 767,
+  const isXs = useMediaQuery({
+    minWidth: 0,
+    maxWidth: 576,
   });
 
-  const isDesktop = useMediaQuery({
+  const isSm = useMediaQuery({
+    minWidth: 577,
+    // maxWidth: 767,
+  });
+
+  const isMd = useMediaQuery({
     minWidth: 768,
+    // maxWidth: 991,
+  });
+
+  const isLg = useMediaQuery({
+    minWidth: 992,
   });
 
   useEffect(() => {
@@ -17,8 +28,10 @@ function useResponsive() {
   }, []);
 
   return {
-    isDesktop: isClient ? isDesktop : true,
-    isMobile: isClient ? isMobile : false,
+    isLg: isClient ? isLg : true,
+    isXs: isClient ? isXs : false,
+    isSm: isClient ? isSm : false,
+    isMd: isClient ? isMd : false,
   };
 }
 

@@ -1,6 +1,6 @@
 function BlogsCreatePage() {
   return (
-    <div>
+    <div className="container">
       BlogsCreatePage
     </div>
   )
