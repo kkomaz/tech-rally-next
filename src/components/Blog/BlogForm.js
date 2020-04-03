@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Card,
   CardTitle,
   Col,
@@ -26,15 +25,15 @@ function BlogForm(props) {
     console.log('canceling');
   }
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    return errors;
-  };
+  // const validate = (values) => {
+  //   const errors = {};
+  //   if (!values.email) {
+  //     errors.email = 'Required';
+  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  //     errors.email = 'Invalid email address';
+  //   }
+  //   return errors;
+  // };
 
   return (
     <Row>
@@ -42,8 +41,8 @@ function BlogForm(props) {
         <Card style={{ maxWidth: '800px' }} body>
           <CardTitle className="text-center">Create Blog</CardTitle>
           <Formik
-            initialValues={{ email: '', password: '' }}
-            validate={validate}
+            initialValues={{ title: '', video_url: '', file: '' }}
+            // validate={validate}
             onSubmit={onSubmit}
             validateOnChange={false}
           >
@@ -59,7 +58,7 @@ function BlogForm(props) {
                       component="input"
                       invalid={!!errors.title}
                     />
-                    <FormFeedback>{errors.title}</FormFeedback>
+                    <FormFeedback>{errors.email}</FormFeedback>
                   </FormGroup>
                   <FormGroup>
                     <Label for="video_url">Video URL</Label>
@@ -73,10 +72,11 @@ function BlogForm(props) {
                     <FormFeedback>{errors.video_url}</FormFeedback>
                   </FormGroup>
                   <FormGroup>
-                    <Label for="exampleFile">Image File</Label>
+                    <Label for="file">Image File</Label>
                     <Input type="file" name="file" tag={Field} />
                     <FormText color="muted">Upload a jpeg or png file</FormText>
                   </FormGroup>
+                  <FormGroup>
                   <FormGroup>
                     <Label for="description">Description</Label>
                     <Input
@@ -88,12 +88,7 @@ function BlogForm(props) {
                     />
                     <FormFeedback>{errors.description}</FormFeedback>
                   </FormGroup>
-                  <FormGroup>
-                    <SubmitWrapper
-                      onSubmit={onSubmit}
-                      onCancel={onCancel}
-                      isSubmitting={isSubmitting}
-                    />
+                    <SubmitWrapper isSubmitting={isSubmitting} onCancel={onCancel} />
                   </FormGroup>
                 </Form>
               );
