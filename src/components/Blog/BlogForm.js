@@ -10,15 +10,31 @@ import {
   Row,
   FormText,
 } from 'reactstrap';
-import { SubmitWrapper } from 'components/Form';
+import { SubmitWrapper } from 'components/FormHelpers';
+import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
+import config from 'utils/config';
+
+// https://codesandbox.io/s/lkkjpr5r7
 
 function BlogForm(props) {
   const onSubmit = (values, options) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+    const { title, video_url, file, description } = values;
+    const formData = new FormData();
+
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("video_url", video_url);
+    formData.append("description", description);
+
+    return axios({
+      method: 'post',
+      url: `${config.API_URL}/api/blogs/create`,
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(() => {
       options.setSubmitting(false);
-    }, 400);
+    });
   };
 
   const onCancel = () => {
@@ -46,7 +62,7 @@ function BlogForm(props) {
             onSubmit={onSubmit}
             validateOnChange={false}
           >
-            {({ errors, isSubmitting }) => {
+            {({ errors, isSubmitting, setFieldValue }) => {
               return (
                 <Form>
                   <FormGroup>
@@ -73,7 +89,9 @@ function BlogForm(props) {
                   </FormGroup>
                   <FormGroup>
                     <Label for="file">Image File</Label>
-                    <Input type="file" name="file" tag={Field} />
+                    <Input id="file" name="file" type="file" onChange={(event) => {
+                      setFieldValue("file", event.currentTarget.files[0]);
+                    }} />
                     <FormText color="muted">Upload a jpeg or png file</FormText>
                   </FormGroup>
                   <FormGroup>

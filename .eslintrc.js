@@ -19,6 +19,7 @@ module.exports = {
     }
   },
   "rules": {
+    'camelcase': 'off',
     "prettier/prettier": 'off',
     'arrow-body-style': 'off',
     'react/react-in-jsx-scope': 'off',
