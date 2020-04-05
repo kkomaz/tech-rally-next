@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import HeaderNav from 'components/HeaderNav';
 import './_app.scss';
+import 'react-quill/dist/quill.snow.css';
 
 function MyApp({ Component, pageProps }) {
   return (

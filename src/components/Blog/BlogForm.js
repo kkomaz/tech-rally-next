@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardTitle,
@@ -14,10 +14,14 @@ import { SubmitWrapper } from 'components/FormHelpers';
 import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
 import config from 'utils/config';
+// import ReactQuill from 'react-quill';
+const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
 // https://codesandbox.io/s/lkkjpr5r7
 
 function BlogForm(props) {
+  const [value, setValue] = useState('');
+
   const onSubmit = (values, options) => {
     const { title, video_url, file, description } = values;
     const formData = new FormData();
@@ -27,14 +31,19 @@ function BlogForm(props) {
     formData.append("video_url", video_url);
     formData.append("description", description);
 
-    return axios({
-      method: 'post',
-      url: `${config.API_URL}/api/blogs/create`,
-      data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }).then(() => {
+    setTimeout(() => {
+      console.log(values);
       options.setSubmitting(false);
-    });
+    }, 400);
+
+    // return axios({
+    //   method: 'post',
+    //   url: `${config.API_URL}/api/blogs/create`,
+    //   data: formData,
+    //   headers: { 'Content-Type': 'multipart/form-data' }
+    // }).then(() => {
+    //   options.setSubmitting(false);
+    // });
   };
 
   const onCancel = () => {
@@ -50,6 +59,25 @@ function BlogForm(props) {
   //   }
   //   return errors;
   // };
+
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'code-block'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'code-block'
+  ];
+
+  console.log(value, 'value');
 
   return (
     <Row>
@@ -105,6 +133,13 @@ function BlogForm(props) {
                       invalid={!!errors.description}
                     />
                     <FormFeedback>{errors.description}</FormFeedback>
+                    <ReactQuill
+                      theme="snow"
+                      value={value}
+                      onChange={setValue}
+                      modules={modules}
+                      formats={formats}
+                    />
                   </FormGroup>
                     <SubmitWrapper isSubmitting={isSubmitting} onCancel={onCancel} />
                   </FormGroup>
