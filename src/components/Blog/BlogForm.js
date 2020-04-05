@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Button,
   Card,
   CardTitle,
   Col,
@@ -18,6 +19,7 @@ import config from 'utils/config';
 const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
 // https://codesandbox.io/s/lkkjpr5r7
+// https://draftjs.org/docs/quickstart-rich-styling
 
 function BlogForm(props) {
   const [value, setValue] = useState('');
