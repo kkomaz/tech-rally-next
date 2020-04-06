@@ -1,5 +1,4 @@
 import SubmitWrapper from './SubmitWrapper';
+import QuillWrapper from './QuillWrapper';
 
-export {
-  SubmitWrapper,
-}
+export { QuillWrapper, SubmitWrapper };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
-  Button,
   Card,
   CardTitle,
   Col,
@@ -11,75 +11,39 @@ import {
   Row,
   FormText,
 } from 'reactstrap';
-import { SubmitWrapper } from 'components/FormHelpers';
+import { SubmitWrapper, QuillWrapper } from 'components/FormHelpers';
 import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
 import config from 'utils/config';
-// import ReactQuill from 'react-quill';
-const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
-// https://codesandbox.io/s/lkkjpr5r7
-// https://draftjs.org/docs/quickstart-rich-styling
-
-function BlogForm(props) {
-  const [value, setValue] = useState('');
+// TODO: Add validations
+// TODO: Add edit form initialValues
+function BlogForm (props) {
+  const [description, setDescription] = useState('');
 
   const onSubmit = (values, options) => {
-    const { title, video_url, file, description } = values;
+    const { title, video_url, file } = values;
     const formData = new FormData();
 
-    formData.append("image", file);
-    formData.append("title", title);
-    formData.append("video_url", video_url);
-    formData.append("description", description);
+    formData.append('image', file);
+    formData.append('title', title);
+    formData.append('video_url', video_url);
+    formData.append('description', description);
 
-    setTimeout(() => {
-      console.log(values);
+    return axios({
+      method: 'post',
+      url: `${config.API_URL}/api/blogs/create`,
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(() => {
       options.setSubmitting(false);
-    }, 400);
-
-    // return axios({
-    //   method: 'post',
-    //   url: `${config.API_URL}/api/blogs/create`,
-    //   data: formData,
-    //   headers: { 'Content-Type': 'multipart/form-data' }
-    // }).then(() => {
-    //   options.setSubmitting(false);
-    // });
+      props.onSubmitSuccess();
+    });
   };
 
-  const onCancel = () => {
-    console.log('canceling');
-  }
-
-  // const validate = (values) => {
-  //   const errors = {};
-  //   if (!values.email) {
-  //     errors.email = 'Required';
-  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-  //     errors.email = 'Invalid email address';
-  //   }
-  //   return errors;
-  // };
-
-  const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image', 'code-block'],
-      ['clean']
-    ],
+  const onCancel = (resetForm) => {
+    resetForm();
   };
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image', 'code-block'
-  ];
-
-  console.log(value, 'value');
 
   return (
     <Row>
@@ -92,7 +56,7 @@ function BlogForm(props) {
             onSubmit={onSubmit}
             validateOnChange={false}
           >
-            {({ errors, isSubmitting, setFieldValue }) => {
+            {({ errors, isSubmitting, setFieldValue, resetForm }) => {
               return (
                 <Form>
                   <FormGroup>
@@ -119,31 +83,25 @@ function BlogForm(props) {
                   </FormGroup>
                   <FormGroup>
                     <Label for="file">Image File</Label>
-                    <Input id="file" name="file" type="file" onChange={(event) => {
-                      setFieldValue("file", event.currentTarget.files[0]);
-                    }} />
+                    <Input
+                      id="file"
+                      name="file"
+                      type="file"
+                      onChange={(event) => {
+                        setFieldValue('file', event.currentTarget.files[0]);
+                      }}
+                    />
                     <FormText color="muted">Upload a jpeg or png file</FormText>
                   </FormGroup>
                   <FormGroup>
-                  <FormGroup>
-                    <Label for="description">Description</Label>
-                    <Input
-                      tag={Field}
-                      name="description"
-                      type="text"
-                      component="textarea"
-                      invalid={!!errors.description}
+                    <FormGroup>
+                      <Label for="description">Description</Label>
+                      <QuillWrapper value={description} onChange={setDescription} />
+                    </FormGroup>
+                    <SubmitWrapper
+                      isSubmitting={isSubmitting}
+                      onCancel={() => onCancel(resetForm)}
                     />
-                    <FormFeedback>{errors.description}</FormFeedback>
-                    <ReactQuill
-                      theme="snow"
-                      value={value}
-                      onChange={setValue}
-                      modules={modules}
-                      formats={formats}
-                    />
-                  </FormGroup>
-                    <SubmitWrapper isSubmitting={isSubmitting} onCancel={onCancel} />
                   </FormGroup>
                 </Form>
               );
@@ -153,6 +111,14 @@ function BlogForm(props) {
       </Col>
     </Row>
   );
+}
+
+BlogForm.propTypes = {
+  onSubmitSuccess: PropTypes.func,
+}
+
+BlogForm.defaultProps = {
+  onSubmitSuccess: () => {}
 }
 
 export default BlogForm;

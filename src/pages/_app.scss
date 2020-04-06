@@ -7,9 +7,12 @@
 @import "bootstrap/scss/bootstrap.scss";
 
 // Modules styles
+@import 'stylesheets/modules/_alert.scss';
 @import 'stylesheets/modules/_button.scss';
-@import 'stylesheets/modules/_nav.scss';
 @import 'stylesheets/modules/_card.scss';
+@import 'stylesheets/modules/_nav.scss';
+@import 'stylesheets/modules/_quill.scss';
+
 
 body {
   font-family: 'Raleway', sans-serif;
