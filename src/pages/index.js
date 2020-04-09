@@ -111,7 +111,7 @@ const Index = () => {
             {
               blogs.map((blog) => {
                 return (
-                  <Col xs={12} md={6} lg={4} className="mb-one">
+                  <Col xs={12} md={6} lg={4} className="mb-one" key={blog._id}>
                     <BlogCard blog={blog} />
                   </Col>
                 )

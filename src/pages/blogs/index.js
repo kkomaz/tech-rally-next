@@ -28,7 +28,7 @@ function BlogsPage() {
         {
           blogs.map((blog) => {
             return (
-              <Col className="mb-one" xs={12} md={6} lg={4}>
+              <Col className="mb-one" xs={12} md={6} lg={4} key={blog._id}>
                 <BlogCard blog={blog} />
               </Col>
             )
