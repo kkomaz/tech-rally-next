@@ -18,7 +18,11 @@ const Index = () => {
   const [blogs, setBlogs] = useState(() => []);
   
   const fetchBlogs = async() => {
-    const result = await axios.get(`${config.API_URL}/api/blogs`);
+    const result = await axios.get(`${config.API_URL}/api/blogs`, {
+      params: {
+        limit: 3,
+      }
+    });
     setBlogs(result.data.blogs);
   }
 

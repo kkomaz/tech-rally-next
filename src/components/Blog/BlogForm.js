@@ -20,13 +20,15 @@ import config from 'utils/config';
 // TODO: Add edit form initialValues
 function BlogForm (props) {
   const [description, setDescription] = useState('');
+  const { initialValues, type } = props;
 
   const onSubmit = (values, options) => {
-    const { title, video_url, file } = values;
+    const { title, video_url, file, sub_title } = values;
     const formData = new FormData();
 
     formData.append('image', file);
     formData.append('title', title);
+    formData.append('sub_title', sub_title);
     formData.append('video_url', video_url);
     formData.append('description', description);
 
@@ -49,9 +51,9 @@ function BlogForm (props) {
     <Row>
       <Col lg={{ size: 6, offset: 3 }} sm={{ size: 8, offset: 2 }}>
         <Card style={{ maxWidth: '800px' }} body>
-          <CardTitle className="text-center">Create Blog</CardTitle>
+          <CardTitle className="text-center">{type === 'create' ? 'Create Blog' : 'Edit Blog'}</CardTitle>
           <Formik
-            initialValues={{ title: '', video_url: '', file: '' }}
+            initialValues={initialValues}
             // validate={validate}
             onSubmit={onSubmit}
             validateOnChange={false}
@@ -67,6 +69,17 @@ function BlogForm (props) {
                       type="text"
                       component="input"
                       invalid={!!errors.title}
+                    />
+                    <FormFeedback>{errors.email}</FormFeedback>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="title">Subtitle</Label>
+                    <Input
+                      tag={Field}
+                      name="sub_title"
+                      type="text"
+                      component="input"
+                      invalid={!!errors.sub_title}
                     />
                     <FormFeedback>{errors.email}</FormFeedback>
                   </FormGroup>
@@ -115,10 +128,19 @@ function BlogForm (props) {
 
 BlogForm.propTypes = {
   onSubmitSuccess: PropTypes.func,
+  initialValues: PropTypes.object,
+  type: PropTypes.string,
 }
 
 BlogForm.defaultProps = {
-  onSubmitSuccess: () => {}
+  onSubmitSuccess: () => {},
+  initialValues: {
+    title: '',
+    sub_title: '',
+    video_url: '',
+    file: '',
+  },
+  type: 'create',
 }
 
 export default BlogForm;

@@ -1,34 +1,40 @@
-// https://stackoverflow.com/questions/47630163/axios-post-request-to-send-form-data
-
-// var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "multipart/form-data; boundary=--------------------------311634474600324725072798");
-
-// var formdata = new FormData();
-// formdata.append("image", fileInput.files[0], "landing-page.png");
-// formdata.append("title", "whats up");
-
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: formdata,
-//   redirect: 'follow'
-// };
-
-// fetch("http://localhost:8080/api/blogs/create?image", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
-import { Button } from 'reactstrap';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
+import config from 'utils/config'
+import { Row, Col, Button } from 'reactstrap';
+import { BlogCard } from 'components/Blog';
 
 function BlogsPage() {
+  const [blogs, setBlogs] = useState(() => []);
+
+  const fetchBlogs = async() => {
+    const result = await axios.get(`${config.API_URL}/api/blogs`);
+    setBlogs(result.data.blogs);
+  }
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
   return (
     <div className="container">
       <Link href="/blogs/create">
-        <Button color="primary">
+        <Button color="primary" className="mb-one">
           Create Blog
         </Button>
       </Link>
+      <Row>
+        {
+          blogs.map((blog) => {
+            return (
+              <Col className="mb-one" xs={12} md={6} lg={4}>
+                <BlogCard blog={blog} />
+              </Col>
+            )
+          })
+        }
+      </Row>
     </div>
   )
 }
