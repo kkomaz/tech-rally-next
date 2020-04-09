@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from 'utils/config';
 
 function ItemPage(props) {
-  const { product } = props;
+  const { product = {} } = props;
 
   return (
     <div>
@@ -21,7 +21,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
