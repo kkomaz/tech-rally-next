@@ -1,4 +1,5 @@
 import HeaderNav from 'components/HeaderNav';
+import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import Link from 'next/link';
 import axios from 'axios';
@@ -15,7 +16,10 @@ function ItemsPage (props) {
       </Link>
       <ul>
         {products.map((product) => (
-          <Link href={`/items/${product._id}`}>
+          <Link
+            href="/items/[id]"
+            as={`/items/${product._id}`}
+          >
             <li>
               <Button color="link">{product.name}</Button>
             </li>
@@ -25,6 +29,10 @@ function ItemsPage (props) {
     </div>
   );
 }
+
+ItemsPage.propTypes = {
+  products: PropTypes.array.isRequired,
+};
 
 export const getStaticProps = async () => {
   const { data } = await axios.get(`${config.API_URL}/api/products`);
