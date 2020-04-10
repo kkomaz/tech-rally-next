@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import config from 'utils/config'
 import { Row, Col, Button, Card, CardBody } from 'reactstrap';
@@ -13,22 +13,9 @@ import styles from './_index.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Index = () => {
+const Index = (props) => {
   const { isMdLayout } = useResponsiveLayout();
-  const [blogs, setBlogs] = useState(() => []);
-  
-  const fetchBlogs = async() => {
-    const result = await axios.get(`${config.API_URL}/api/blogs`, {
-      params: {
-        limit: 3,
-      }
-    });
-    setBlogs(result.data.blogs);
-  }
-
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
+  const { blogs } = props;
 
   return (
     <>
@@ -158,19 +145,22 @@ const Index = () => {
   );
 };
 
-export async function getServerSideProps ({ req, res }) {
-  const isServer = !!req;
+Index.propTypes = {
+  blogs: PropTypes.array.isRequired,
+}
 
-  if (isServer) {
-    console.log('server');
-  } else {
-    console.log('client');
-  }
+export const getStaticProps = async () => {
+  const { data } = await axios.get(`${config.API_URL}/api/blogs`, {
+    params: {
+      limit: 3,
+    }
+  });
 
   return {
     props: {
-      data: {},
-    },
-  };
+      blogs: data,
+    }
+  }
 }
+
 export default Index;

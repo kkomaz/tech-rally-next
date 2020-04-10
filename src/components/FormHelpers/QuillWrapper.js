@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './_quill-wrapper.module.scss';
 
 const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
@@ -7,7 +8,7 @@ const ReactQuill = typeof window === 'object' ? require('react-quill') : () => f
 // https://stackoverflow.com/questions/40952434/how-do-i-display-the-content-of-react-quill-without-the-html-markup
 
 function QuillWrapper(props) {
-  const { value, onChange } = props;
+  const { value, onChange, readOnly } = props;
 
   const modules = {
     toolbar: [
@@ -26,6 +27,17 @@ function QuillWrapper(props) {
     'link', 'image', 'code-block'
   ];
 
+  if (readOnly) {
+    return (
+      <ReactQuill
+        className={styles.readOnly}
+        value={value}
+        modules={{ toolbar: null }}
+        readOnly
+      />
+    )
+  }
+
   return (
     <ReactQuill
       theme="snow"
@@ -39,7 +51,13 @@ function QuillWrapper(props) {
 
 QuillWrapper.propTypes = {
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
+}
+
+QuillWrapper.defaultProps = {
+  readOnly: false,
+  onChange: () => {}
 }
 
 export default QuillWrapper;

@@ -1,21 +1,12 @@
-import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import axios from 'axios';
 import config from 'utils/config'
 import { Row, Col, Button } from 'reactstrap';
 import { BlogCard } from 'components/Blog';
 
-function BlogsPage() {
-  const [blogs, setBlogs] = useState(() => []);
-
-  const fetchBlogs = async() => {
-    const result = await axios.get(`${config.API_URL}/api/blogs`);
-    setBlogs(result.data.blogs);
-  }
-
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
+function BlogsPage(props) {
+  const { blogs } = props;
 
   return (
     <div className="container">
@@ -37,6 +28,24 @@ function BlogsPage() {
       </Row>
     </div>
   )
+}
+
+BlogsPage.propTypes = {
+  blogs: PropTypes.array.isRequired,
+}
+
+export const getStaticProps = async () => {
+  const { data } = await axios.get(`${config.API_URL}/api/blogs`, {
+    params: {
+      limit: 3,
+    }
+  });
+
+  return {
+    props: {
+      blogs: data,
+    }
+  }
 }
 
 export default BlogsPage
