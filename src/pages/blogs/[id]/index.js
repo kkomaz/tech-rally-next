@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import config from 'utils/config';
 import { Button, Row, Col } from 'reactstrap';
 import { QuillWrapper } from 'components/FormHelpers';
+import Socials from 'components/Socials';
 import { FaFacebook } from "react-icons/fa";
 
 function BlogsDetailPage (props) {
@@ -11,7 +12,7 @@ function BlogsDetailPage (props) {
   return (
     <div className="container">
       <Row>
-        <Col xs={12} sm={8}>
+        <Col xs={12} md={8}>
           <h1>{blog.title}</h1>
           <h4>{blog.sub_title}</h4>
           <div className="mb-one profile-detail-wrapper">
@@ -44,14 +45,14 @@ function BlogsDetailPage (props) {
             <QuillWrapper readOnly value={blog.description} />
           </div>
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} md={4}>
           <div className="facebook-group">
             <img
               className="logo mb-one"
               src="https://tech-rally-test-bucket.s3.us-east-2.amazonaws.com/Profile_Picture.png"
               alt="logo"
-              height="80"
-              width="80"
+              height="75"
+              width="75"
             />
             <p>Looking to join a community of aspiring developers?</p>
             <p>
@@ -66,9 +67,20 @@ function BlogsDetailPage (props) {
             Join Now!
             <FaFacebook className="ml-quarter mb-quarter" />
           </Button>
+          
+          <hr className="divider" />
+
+          <Socials />
         </Col>
       </Row>
       <style jsx>{`
+        .divider {
+          border: none;
+          height: 2px;
+          width: 50%;
+          color: #C1C8E4;
+          background-color: #C1C8E4;
+        }
         .facebook-group-text-detail {
           line-height: 2em;
         }

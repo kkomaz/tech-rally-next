@@ -1,0 +1,23 @@
+.socials {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.youtube {
+  &:hover {
+    color: #FF0000;
+  }
+}
+
+.twitter {
+  &:hover {
+    color: #1DA1F2;
+  }
+}
+
+.instagram {
+  &:hover {
+    color: #C13584;
+  }
+}
