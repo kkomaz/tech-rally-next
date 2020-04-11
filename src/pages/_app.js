@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
 import HeaderNav from 'components/HeaderNav';
+import Socials from 'components/Socials';
 import './_app.scss';
 import 'react-quill/dist/quill.snow.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div className="main-container">
       <Head>
         <title>Thoughts!</title>
       </Head>
@@ -14,7 +15,15 @@ function MyApp({ Component, pageProps }) {
       <div className="body">
         <Component {...pageProps} />
       </div>
-    </>
+      <div className="footer">
+        <Socials size="3em" color="#FFFAFA" />
+        <h5
+          className="mt-one copy-right"
+        >
+          TechRally ©2020
+        </h5>
+      </div>
+    </div>
   );
 }
 

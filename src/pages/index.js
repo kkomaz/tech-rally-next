@@ -6,6 +6,7 @@ import Link from 'next/link';
 import classNames from 'classnames/bind';
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import { BlogCard } from 'components/Blog';
+
 import landPageSvg from '../assets/svg/landing-page-section.svg';
 import styles from './_index.module.scss';
 // https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
@@ -110,11 +111,12 @@ const Index = (props) => {
       <div className={styles.sectionPage}>
         <div className="container">
           <Row>
-            <Col xs={{ size: 12, order: 2 }} md={{ size: 6, order: 1 }}>
+            <Col xs={12}>
               <div>
-                <h1 className={styles.sectionMainText}>
-                  A one stop shop to learning the newest web technologies.
+                <h1 className={styles.contactText}>
+                  Contact
                 </h1>
+                <hr className="divider divider--xsmall" />
                 <h4
                   className={cx({
                     sectionSecondaryText: true,

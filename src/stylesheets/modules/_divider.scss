@@ -1,0 +1,15 @@
+.divider {
+  border: none;
+  height: 2px;
+  width: 50%;
+  color: #C1C8E4;
+  background-color: #C1C8E4;
+
+  &--small {
+    width: 20%;
+  }
+
+  &--xsmall {
+    width: 10%;
+  }
+}

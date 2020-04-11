@@ -63,7 +63,7 @@ function BlogsDetailPage (props) {
               place to ask questions and collaborate.
             </p>
           </div>
-          <Button style={{ width: '100%' }} size="lg" color="primary">
+          <Button style={{ width: '100%' }} size="lg" color="primary" onClick={() => window.open('https://www.facebook.com/groups/811715242683243')}>
             Join Now!
             <FaFacebook className="ml-quarter mb-quarter" />
           </Button>
@@ -74,13 +74,6 @@ function BlogsDetailPage (props) {
         </Col>
       </Row>
       <style jsx>{`
-        .divider {
-          border: none;
-          height: 2px;
-          width: 50%;
-          color: #C1C8E4;
-          background-color: #C1C8E4;
-        }
         .facebook-group-text-detail {
           line-height: 2em;
         }

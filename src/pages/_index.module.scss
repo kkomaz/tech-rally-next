@@ -47,7 +47,7 @@
 
 // blogs
 .blogSection {
-  padding: 50px 40px;
+  padding: 90px 40px;
   background: $shadow;
   position: relative;
 }
@@ -71,6 +71,11 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+// Contact Info
+.contactText {
+  text-align: center;
 }
 
 @media only screen and (min-width: 480px) {
