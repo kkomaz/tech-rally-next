@@ -7,7 +7,7 @@ import styles from './_socials.module.scss';
 const cx = classNames.bind(styles);
 
 function Socials (props) {
-  const { hideYT, hideTwitter, hideIg, color, size } = props;
+  const { hideYT, hideTwitter, hideIg, hideFb, color, size } = props;
 
   return (
     <div className={styles.socials}>
@@ -69,9 +69,9 @@ function Socials (props) {
         </a>
       }
       {
-        !hideIg &&
+        !hideFb &&
         <a
-          href="https://www.instagram.com/kkomaz/"
+          href="https://www.facebook.com/groups/811715242683243"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -93,6 +93,7 @@ function Socials (props) {
 Socials.propTypes = {
   hideIg: PropTypes.bool,
   hideYT: PropTypes.bool,
+  hideFb: PropTypes.bool,
   hideTwitter: PropTypes.bool,
   color: PropTypes.string,
   size: PropTypes.string,
@@ -102,8 +103,9 @@ Socials.defaultProps = {
   hideYT: false,
   hideIg: false,
   hideTwitter: false,
+  hideFb: false,
   color: '#8860D0',
-  size: "4em",
+  size: "3em",
 }
 
 export default Socials;

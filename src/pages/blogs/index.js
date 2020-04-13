@@ -35,11 +35,7 @@ BlogsPage.propTypes = {
 }
 
 export const getStaticProps = async () => {
-  const { data } = await axios.get(`${config.API_URL}/api/blogs`, {
-    params: {
-      limit: 3,
-    }
-  });
+  const { data } = await axios.get(`${config.API_URL}/api/blogs`);
 
   return {
     props: {

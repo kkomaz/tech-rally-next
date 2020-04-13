@@ -19,28 +19,56 @@ import config from 'utils/config';
 // TODO: Add validations
 // TODO: Add edit form initialValues
 function BlogForm (props) {
-  const [description, setDescription] = useState('');
-  const { initialValues, type } = props;
+  // eslint-disable-next-line react/destructuring-assignment
+  const [description, setDescription] = useState(() => props.description || '');
+  const { initialValues, type, id } = props;
 
-  const onSubmit = (values, options) => {
-    const { title, video_url, file, sub_title } = values;
-    const formData = new FormData();
-
-    formData.append('image', file);
-    formData.append('title', title);
-    formData.append('sub_title', sub_title);
-    formData.append('video_url', video_url);
-    formData.append('description', description);
-
+  const handleFileSubmit = (method, url, formData, options) => {
     return axios({
-      method: 'post',
-      url: `${config.API_URL}/api/blogs/create`,
+      method,
+      url,
       data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     }).then(() => {
       options.setSubmitting(false);
       props.onSubmitSuccess();
     });
+  };
+
+  const onSubmit = (values, options) => {
+    const { title, video_url, file, sub_title } = values;
+    let formData;
+    let request;
+
+    if (file) {
+      formData = new FormData();
+
+      formData.append('image', file);
+      formData.append('title', title);
+      formData.append('sub_title', sub_title);
+      formData.append('video_url', video_url);
+      formData.append('description', description);
+    }
+
+    if (type === 'create') {
+      request = handleFileSubmit(
+        'post',
+        `${config.API_URL}/api/blogs/create`,
+        formData,
+        options
+      );
+    } else {
+      request = file
+        ? handleFileSubmit('put', `${config.API_URL}/api/blogs/${id}/update`, formData, options)
+        : axios
+            .put(`${config.API_URL}/api/blogs/${id}/update`, { ...values, description })
+            .then(() => {
+              options.setSubmitting(false);
+              props.onSubmitSuccess();
+            });
+    }
+
+    return request;
   };
 
   const onCancel = (resetForm) => {
@@ -51,7 +79,9 @@ function BlogForm (props) {
     <Row>
       <Col lg={{ size: 6, offset: 3 }} sm={{ size: 8, offset: 2 }}>
         <Card style={{ maxWidth: '800px' }} body>
-          <CardTitle className="text-center">{type === 'create' ? 'Create Blog' : 'Edit Blog'}</CardTitle>
+          <CardTitle className="text-center">
+            {type === 'create' ? 'Create Blog' : 'Edit Blog'}
+          </CardTitle>
           <Formik
             initialValues={initialValues}
             // validate={validate}
@@ -130,7 +160,9 @@ BlogForm.propTypes = {
   onSubmitSuccess: PropTypes.func,
   initialValues: PropTypes.object,
   type: PropTypes.string,
-}
+  description: PropTypes.string,
+  id: PropTypes.string,
+};
 
 BlogForm.defaultProps = {
   onSubmitSuccess: () => {},
@@ -140,7 +172,9 @@ BlogForm.defaultProps = {
     video_url: '',
     file: '',
   },
+  description: '',
+  id: '',
   type: 'create',
-}
+};
 
 export default BlogForm;

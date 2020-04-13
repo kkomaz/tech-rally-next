@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </div>
       <div className="footer">
-        <Socials size="3em" color="#FFFAFA" />
+        <Socials color="#FFFAFA" />
         <h5
           className="mt-one copy-right"
         >

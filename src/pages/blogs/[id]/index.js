@@ -4,10 +4,13 @@ import config from 'utils/config';
 import { Button, Row, Col } from 'reactstrap';
 import { QuillWrapper } from 'components/FormHelpers';
 import Socials from 'components/Socials';
+import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import { FaFacebook } from "react-icons/fa";
 
 function BlogsDetailPage (props) {
   const { blog = {} } = props;
+
+  const { isMdLayout } = useResponsiveLayout();
 
   return (
     <div className="container">
@@ -70,7 +73,7 @@ function BlogsDetailPage (props) {
           
           <hr className="divider" />
 
-          <Socials />
+          { isMdLayout && <Socials hideFb size="3.5em" /> }
         </Col>
       </Row>
       <style jsx>{`
