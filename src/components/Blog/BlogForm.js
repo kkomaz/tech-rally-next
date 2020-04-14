@@ -60,8 +60,7 @@ function BlogForm (props) {
     } else {
       request = file
         ? handleFileSubmit('put', `${config.API_URL}/api/blogs/${id}/update`, formData, options)
-        : axios
-            .put(`${config.API_URL}/api/blogs/${id}/update`, { ...values, description })
+        : axios.put(`${config.API_URL}/api/blogs/${id}/update`, { ...values, description })
             .then(() => {
               options.setSubmitting(false);
               props.onSubmitSuccess();
