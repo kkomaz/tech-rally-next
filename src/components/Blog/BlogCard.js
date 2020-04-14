@@ -18,7 +18,7 @@ import styles from './_blog-card.module.scss';
 const cx = classNames.bind(styles);
 
 function BlogCard(props) {
-  const { blog: { _id, title, image_url, key } } = props;
+  const { blog: { _id, title, image_url, key, sub_title } } = props;
   const router = useRouter()
 
   const onDelete = async () => {
@@ -43,9 +43,9 @@ function BlogCard(props) {
     >
       <CardBody>
         <CardTitle>{title}</CardTitle>
-        <CardSubtitle>Common mistakes too many people make</CardSubtitle>
+        <CardSubtitle>{sub_title}</CardSubtitle>
         <div className="mt-half">
-          <Link href={`blogs/${_id}`}>
+          <Link href={`blogs/[${_id}]`} as={`blogs/${title.toLowerCase().split(' ').join('-')}-${_id}`}>
             <Button color="primary" className="mr-half">
               Show
             </Button>

@@ -10,21 +10,24 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { useRouter } from 'next/router'
 import styles from './_header-nav.module.scss';
 
 const HeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter();
+
   const toggle = () => setIsOpen(!isOpen);
+
+  const onBrandClick = () => router.push('/');
 
   return (
     <div className={styles.containerBackground}>
       <Navbar className={classNames({
         'container': true,
       })} color="light" light expand="sm">
-        <Link href="/">
-          <NavbarBrand>techrally.me</NavbarBrand>
-        </Link>
+        <NavbarBrand onClick={onBrandClick}>techrally.me</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

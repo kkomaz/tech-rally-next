@@ -9,7 +9,7 @@ import { FaFacebook } from "react-icons/fa";
 
 function BlogsDetailPage (props) {
   const { blog = {} } = props;
-
+  
   const { isMdLayout } = useResponsiveLayout();
 
   return (
@@ -124,17 +124,18 @@ export const getStaticPaths = async () => {
   const { data } = await axios.get(`${config.API_URL}/api/blogs`);
 
   const paths = data.map((blog) => ({
-    params: { id: blog._id },
+    params: { id: `${blog.title.toLowerCase().split(' ').join('-')}-${blog._id}`},
   }));
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { data } = await axios.get(`${config.API_URL}/api/blogs/${params.id}`);
+  const [id] = params.id.split('-').slice(-1);
+  const { data } = await axios.get(`${config.API_URL}/api/blogs/${id}`);
 
   return {
     props: {
@@ -144,3 +145,5 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export default BlogsDetailPage;
+
+// title.toLowerCase().split(' ').join('-')
