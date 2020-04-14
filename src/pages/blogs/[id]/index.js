@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import config from 'utils/config';
@@ -5,14 +6,19 @@ import { Button, Row, Col } from 'reactstrap';
 import { QuillWrapper } from 'components/FormHelpers';
 import Socials from 'components/Socials';
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
+import formatDate from 'utils/date/formatDate';
 import { FaFacebook } from "react-icons/fa";
 
 function BlogsDetailPage (props) {
   const { blog = {} } = props;
-  
-  const { isMdLayout } = useResponsiveLayout();
 
-  return (
+   const { isMdLayout } = useResponsiveLayout();
+
+   const date = useMemo(() => {
+     return formatDate(blog.created_at)
+   }, [blog.created_at]);
+
+   return (
     <div className="container">
       <Row>
         <Col xs={12} md={8}>
@@ -32,7 +38,7 @@ function BlogsDetailPage (props) {
               >
                 Alexander Lee
               </a>
-              <p style={{ marginBottom: 0 }}>Jun 7, 2018</p>
+              <p style={{ marginBottom: 0 }}>{date}</p>
             </div>
           </div>
           <div className="iframeWrapper">

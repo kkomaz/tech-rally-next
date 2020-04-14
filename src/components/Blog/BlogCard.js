@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Button,
   Card,
@@ -12,14 +12,20 @@ import axios from 'axios';
 import classNames from 'classnames/bind';
 import config from 'utils/config';
 import { useRouter } from 'next/router'
+import formatDate from 'utils/date/formatDate';
+
 import styles from './_blog-card.module.scss';
 // https://stackoverflow.com/questions/11426275/how-can-i-show-dots-in-a-span-with-hidden-overflow (CSS Styling)
 
 const cx = classNames.bind(styles);
 
 function BlogCard(props) {
-  const { blog: { _id, title, image_url, key, sub_title } } = props;
+  const { blog: { _id, title, image_url, key, sub_title, created_at } } = props;
   const router = useRouter()
+
+   const date = useMemo(() => {
+     return formatDate(created_at)
+   }, [created_at]);
 
   const onDelete = async () => {
     try {
@@ -44,6 +50,7 @@ function BlogCard(props) {
       <CardBody>
         <CardTitle>{title}</CardTitle>
         <CardSubtitle>{sub_title}</CardSubtitle>
+        <h6 className="mt-half">{date}</h6>
         <div className="mt-half">
           <Link href={`blogs/[${_id}]`} as={`blogs/${title.toLowerCase().split(' ').join('-')}-${_id}`}>
             <Button color="primary" className="mr-half">
