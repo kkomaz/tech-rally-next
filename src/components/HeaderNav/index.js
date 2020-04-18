@@ -11,10 +11,12 @@ import {
   NavLink,
 } from 'reactstrap';
 import { useRouter } from 'next/router'
+import { useUser } from '../../utils/user';
 import styles from './_header-nav.module.scss';
 
 const HeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, loading } = useUser();
 
   const router = useRouter();
 
@@ -41,11 +43,24 @@ const HeaderNav = () => {
               <NavLink>Blogs</NavLink>
               </Link>
             </NavItem>
-            <NavItem className="mr-one">
-              <Link href="/sign-in">
-              <NavLink>Sign In</NavLink>
-              </Link>
-            </NavItem>
+            {
+              !loading &&
+              (
+                user ? (
+                  <NavItem className="mr-one">
+                    <Link href="/api/logout">
+                    <NavLink>Sign Out</NavLink>
+                    </Link>
+                  </NavItem>
+                ) : (
+                  <NavItem className="mr-one">
+                    <Link href="/api/login">
+                    <NavLink>Sign In</NavLink>
+                    </Link>
+                  </NavItem>
+                )
+              )
+            }
           </Nav>
         </Collapse>
       </Navbar>

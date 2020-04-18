@@ -6,6 +6,8 @@ import Link from 'next/link';
 import classNames from 'classnames/bind';
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import { BlogCard } from 'components/Blog';
+import Layout from 'components/Layout';
+import { useFetchUser } from '../utils/user';
 
 import landPageSvg from '../assets/svg/landing-page-section.svg';
 import styles from './_index.module.scss';
@@ -17,9 +19,10 @@ const cx = classNames.bind(styles);
 const Index = (props) => {
   const { isMdLayout } = useResponsiveLayout();
   const { blogs } = props;
+   const { user, loading } = useFetchUser();
 
   return (
-    <>
+    <Layout user={user}>
       <div className={styles.sectionPage}>
         <div className="container">
           <Row>
@@ -143,7 +146,7 @@ const Index = (props) => {
           </Row>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
