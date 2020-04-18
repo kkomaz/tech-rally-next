@@ -21,14 +21,17 @@ import config from 'utils/config';
 function BlogForm (props) {
   // eslint-disable-next-line react/destructuring-assignment
   const [description, setDescription] = useState(() => props.description || '');
-  const { initialValues, type, id } = props;
+  const { initialValues, type, id, token } = props;
 
   const handleFileSubmit = (method, url, formData, options) => {
     return axios({
       method,
       url,
       data: formData,
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}` 
+      },
     }).then(() => {
       options.setSubmitting(false);
       props.onSubmitSuccess();
@@ -60,11 +63,13 @@ function BlogForm (props) {
     } else {
       request = file
         ? handleFileSubmit('put', `${config.API_URL}/api/blogs/${id}/update`, formData, options)
-        : axios.put(`${config.API_URL}/api/blogs/${id}/update`, { ...values, description })
-            .then(() => {
-              options.setSubmitting(false);
-              props.onSubmitSuccess();
-            });
+        : axios.put(`${config.API_URL}/api/blogs/${id}/update`, { ...values, description }, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(() => {
+          options.setSubmitting(false);
+          props.onSubmitSuccess();
+        });
     }
 
     return request;

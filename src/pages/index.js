@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 const Index = (props) => {
   const { isMdLayout } = useResponsiveLayout();
   const { blogs } = props;
-   const { user, loading } = useFetchUser();
+   const { user } = useFetchUser();
 
   return (
     <Layout user={user}>
