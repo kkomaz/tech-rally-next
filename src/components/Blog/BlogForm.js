@@ -23,6 +23,8 @@ function BlogForm (props) {
   const [description, setDescription] = useState(() => props.description || '');
   const { initialValues, type, id, token } = props;
 
+  console.log(token);
+
   const handleFileSubmit = (method, url, formData, options) => {
     return axios({
       method,
