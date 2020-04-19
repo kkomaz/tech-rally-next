@@ -12,6 +12,7 @@ import axios from 'axios';
 import classNames from 'classnames/bind';
 import config from 'utils/config';
 import { useUser } from 'utils/user';
+
 import { useRouter } from 'next/router'
 import formatDate from 'utils/date/formatDate';
 
@@ -25,11 +26,9 @@ function BlogCard(props) {
   const router = useRouter()
   const { user } = useUser();
 
-  console.log(user);
-
-   const date = useMemo(() => {
-     return formatDate(created_at)
-   }, [created_at]);
+  const date = useMemo(() => {
+    return formatDate(created_at)
+  }, [created_at]);
 
   const onDelete = async () => {
     try {

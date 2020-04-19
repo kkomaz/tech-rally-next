@@ -4,29 +4,37 @@ import axios from 'axios';
 import config from 'utils/config'
 import { Row, Col, Button } from 'reactstrap';
 import { BlogCard } from 'components/Blog';
+import Layout from 'components/Layout';
+import { useFetchUser } from 'utils/user';
 
 function BlogsPage(props) {
   const { blogs } = props;
+  const { user } = useFetchUser();
 
   return (
-    <div className="container">
-      <Link href="/blogs/create">
-        <Button color="primary" className="mb-one">
-          Create Blog
-        </Button>
-      </Link>
-      <Row>
+    <Layout user={user}>
+      <div className="container">
         {
-          blogs.map((blog) => {
-            return (
-              <Col className="mb-one" xs={12} md={6} lg={4} key={blog._id}>
-                <BlogCard blog={blog} />
-              </Col>
-            )
-          })
+          user &&
+          <Link href="/blogs/create">
+            <Button color="primary" className="mb-one">
+              Create Blog
+            </Button>
+          </Link>
         }
-      </Row>
-    </div>
+        <Row>
+          {
+            blogs.map((blog) => {
+              return (
+                <Col className="mb-one" xs={12} md={6} lg={4} key={blog._id}>
+                  <BlogCard blog={blog} user={user} />
+                </Col>
+              )
+            })
+          }
+        </Row>
+      </div>
+    </Layout>
   )
 }
 

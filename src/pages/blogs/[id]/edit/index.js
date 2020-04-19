@@ -4,9 +4,12 @@ import { useRouter } from 'next/router'
 import config from 'utils/config';
 import auth0 from 'utils/auth0';
 import axios from 'axios';
+import Layout from 'components/Layout';
+import { useFetchUser } from 'utils/user';
 
 function BlogsIdEditPage(props) {
   const { blog: { _id, title, sub_title, video_url, image_url, description }, token } = props;
+  const { user } = useFetchUser();
   const router = useRouter()
 
   const onSubmitSuccess = () => {
@@ -14,21 +17,23 @@ function BlogsIdEditPage(props) {
   }
 
   return (
-    <div className="container">
-      <BlogForm
-        onSubmitSuccess={onSubmitSuccess}
-        initialValues={{
-          title,
-          sub_title,
-          video_url,
-          image_url,
-        }}
-        description={description}
-        id={_id}
-        type="edit"
-        token={token}
-      />
-    </div>
+    <Layout user={user}>
+      <div className="container">
+        <BlogForm
+          onSubmitSuccess={onSubmitSuccess}
+          initialValues={{
+            title,
+            sub_title,
+            video_url,
+            image_url,
+          }}
+          description={description}
+          id={_id}
+          type="edit"
+          token={token}
+        />
+      </div>
+    </Layout>
   )
 }
 
