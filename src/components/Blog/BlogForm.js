@@ -15,15 +15,15 @@ import { SubmitWrapper, QuillWrapper } from 'components/FormHelpers';
 import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
 import config from 'utils/config';
+import { useRouter } from 'next/router'
 
 // TODO: Add validations
 // TODO: Add edit form initialValues
 function BlogForm (props) {
   // eslint-disable-next-line react/destructuring-assignment
   const [description, setDescription] = useState(() => props.description || '');
-  const { initialValues, type, id, token } = props;
-
-  console.log(token);
+  const { initialValues, type, id, token, imageKey } = props;
+  const router = useRouter()
 
   const handleFileSubmit = (method, url, formData, options) => {
     return axios({
@@ -39,6 +39,19 @@ function BlogForm (props) {
       props.onSubmitSuccess();
     });
   };
+
+  const onDelete = async () => {
+    try {
+      await axios.delete(`${config.API_URL}/api/blogs/${id}/delete`, {
+        data: {
+          key: imageKey,
+        },
+      });
+      router.push('/blogs');
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
 
   const onSubmit = (values, options) => {
     const { title, video_url, file, sub_title } = values;
@@ -149,7 +162,9 @@ function BlogForm (props) {
                     </FormGroup>
                     <SubmitWrapper
                       isSubmitting={isSubmitting}
+                      onDelete={onDelete}
                       onCancel={() => onCancel(resetForm)}
+                      type={type}
                     />
                   </FormGroup>
                 </Form>
@@ -163,11 +178,13 @@ function BlogForm (props) {
 }
 
 BlogForm.propTypes = {
-  onSubmitSuccess: PropTypes.func,
-  initialValues: PropTypes.object,
-  type: PropTypes.string,
   description: PropTypes.string,
   id: PropTypes.string,
+  initialValues: PropTypes.object,
+  onSubmitSuccess: PropTypes.func,
+  token: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  imageKey: PropTypes.string.isRequired,
 };
 
 BlogForm.defaultProps = {

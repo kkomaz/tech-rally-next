@@ -5,7 +5,7 @@ import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import styles from './_submit-wrapper.module.scss';
 
 function SubmitWrapper (props) {
-  const { type, onCancel, isSubmitting } = props;
+  const { type, onCancel, isSubmitting, onDelete } = props;
 
   const { isMdLayout } = useResponsiveLayout();
 
@@ -13,6 +13,12 @@ function SubmitWrapper (props) {
   if (isMdLayout) {
     return (
       <div className={styles.submitWrapper}>
+        {
+          type === 'edit' &&
+          <Button className="mr-one" color="danger" onClick={onDelete}>
+            Delete
+          </Button>
+        }
         <Button
           className="mr-one"
           color="secondary"
@@ -30,6 +36,12 @@ function SubmitWrapper (props) {
 
   return (
     <div className={styles.submitWrapperMobile}>
+      {
+        type === 'edit' &&
+        <Button className="mb-half" color="danger" onClick={onDelete}>
+          Delete
+        </Button>
+      }
       <Button
         color="primary"
         className="mb-half"
@@ -48,11 +60,13 @@ function SubmitWrapper (props) {
 
 SubmitWrapper.defaultProps = {
   type: 'create',
+  onDelete: () => {},
 };
 
 SubmitWrapper.propTypes = {
   type: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   isSubmitting: PropTypes.bool.isRequired,
 };
 

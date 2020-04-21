@@ -8,9 +8,7 @@ import {
   CardSubtitle,
 } from 'reactstrap';
 import Link from 'next/link';
-import axios from 'axios';
 import classNames from 'classnames/bind';
-import config from 'utils/config';
 import { useUser } from 'utils/user';
 
 import { useRouter } from 'next/router'
@@ -23,25 +21,13 @@ const cx = classNames.bind(styles);
 
 function BlogCard(props) {
   const { blog: { _id, title, image_url, key, sub_title, created_at } } = props;
+
   const router = useRouter()
   const { user } = useUser();
 
   const date = useMemo(() => {
     return formatDate(created_at)
   }, [created_at]);
-
-  const onDelete = async () => {
-    try {
-      await axios.delete(`${config.API_URL}/api/blogs/${_id}/delete`, {
-        data: {
-          key,
-        },
-      });
-      router.push('/blogs');
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
 
   const onCardClick = () => {
     if (!user) {
@@ -74,9 +60,6 @@ function BlogCard(props) {
                 Edit
               </Button>
             </Link>
-            <Button color="danger" onClick={onDelete}>
-              Delete
-            </Button>
           </div>
         }
       </CardBody>

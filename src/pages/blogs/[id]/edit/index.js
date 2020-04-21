@@ -8,7 +8,7 @@ import Layout from 'components/Layout';
 import { useFetchUser } from 'utils/user';
 
 function BlogsIdEditPage(props) {
-  const { blog: { _id, title, sub_title, video_url, image_url, description }, token } = props;
+  const { blog: { _id, title, sub_title, video_url, image_url, description, key }, token } = props;
   const { user } = useFetchUser();
   const router = useRouter()
 
@@ -28,6 +28,7 @@ function BlogsIdEditPage(props) {
             image_url,
           }}
           description={description}
+          imageKey={key}
           id={_id}
           type="edit"
           token={token}
@@ -48,7 +49,17 @@ BlogsIdEditPage.propTypes = {
 }
 
 export const getServerSideProps = async ({ params, req, res  }) => {
+  const session = await auth0.getSession(req);
+  
+  if (!session || !session.user) {
+    res.writeHead(302, {
+      Location: '/api/login'
+    });
+    res.end();
+  }
+
   const { data } = await axios.get(`${config.API_URL}/api/blogs/${params.id}`);
+
   const tokenCache = await auth0.tokenCache(req, res);
   const { accessToken } = await tokenCache.getAccessToken();
 
