@@ -11,8 +11,6 @@ import { useFetchUser } from '../utils/user';
 
 import landPageSvg from '../assets/svg/landing-page-section.svg';
 import styles from './_index.module.scss';
-// https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
-// https://www.webdesignerdepot.com/2017/01/50-creative-card-ui-designs/
 
 const cx = classNames.bind(styles);
 

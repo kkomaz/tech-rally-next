@@ -8,6 +8,7 @@ import { BlogCard } from 'components/Blog';
 import Layout from 'components/Layout';
 import { useFetchUser } from 'utils/user';
 import Paging from 'components/Paging';
+import CommunityBanner from 'components/CommunityBanner';
 import styles from './index.module.scss';
 
 function BlogsPage(props) {
@@ -34,15 +35,22 @@ function BlogsPage(props) {
           </Link>
         }
         <Row>
-          {
-            currentBlogs.map((blog) => {
-              return (
-                <Col className="mb-one" xs={12} md={6} lg={4} key={blog._id}>
-                  <BlogCard blog={blog} user={user} />
-                </Col>
-              )
-            })
-          }
+          <Col xs={12} md={9}>
+            <Row>
+              {
+                currentBlogs.map((blog) => {
+                  return (
+                    <Col className="mb-one" xs={12} lg={6} key={blog._id}>
+                      <BlogCard blog={blog} user={user} />
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+          </Col>
+          <Col xs={12} md={3}>
+            <CommunityBanner />
+          </Col>
 
           <Paging
             className={styles.pagingWrapper}

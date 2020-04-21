@@ -18,7 +18,6 @@ import config from 'utils/config';
 import { useRouter } from 'next/router'
 
 // TODO: Add validations
-// TODO: Add edit form initialValues
 function BlogForm (props) {
   // eslint-disable-next-line react/destructuring-assignment
   const [description, setDescription] = useState(() => props.description || '');
