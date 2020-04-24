@@ -21,9 +21,7 @@ function BlogsCreatePage(props) {
 
 export const getServerSideProps = async ({ params, req, res  }) => {
   const tokenCache = await auth0.tokenCache(req, res);
-  const { accessToken } = await tokenCache.getAccessToken({
-    scopes: ['create:blogs']
-  });
+  const { accessToken } = await tokenCache.getAccessToken({});
 
   return {
     props: {

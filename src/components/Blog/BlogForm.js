@@ -42,8 +42,12 @@ function BlogForm (props) {
   const onDelete = async () => {
     try {
       await axios.delete(`${config.API_URL}/api/blogs/${id}/delete`, {
-        data: {
-          key: imageKey,
+        params: {
+          image_key: imageKey,
+        },
+        headers: {
+        'Content-Type': 'multipar t/form-data',
+        'Authorization': `Bearer ${token}` 
         },
       });
       router.push('/blogs');
