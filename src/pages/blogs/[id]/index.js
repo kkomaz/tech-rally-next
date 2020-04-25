@@ -2,20 +2,26 @@ import { useMemo } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import config from 'utils/config';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 import { QuillWrapper } from 'components/FormHelpers';
 import formatDate from 'utils/date/formatDate';
 import Layout from 'components/Layout';
 import { useFetchUser } from 'utils/user';
 import CommunityBanner from 'components/CommunityBanner';
+import { useRouter } from 'next/router';
 
 function BlogsDetailPage (props) {
   const { blog = {} } = props;
   const { user } = useFetchUser();
+  const router = useRouter();
 
   const date = useMemo(() => {
     return formatDate(blog.created_at);
   }, [blog.created_at]);
+
+  const goToBlogs = () => {
+    router.push('/blogs');
+  }
 
   return (
     <Layout user={user}>
@@ -25,19 +31,23 @@ function BlogsDetailPage (props) {
             <h1>{blog.title}</h1>
             <h4>{blog.sub_title}</h4>
             <div className="mb-one profile-detail-wrapper">
-              <img
-                className="profile-image"
-                src="https://miro.medium.com/fit/c/48/48/0*74rUDAu4TpM5U-mo."
-                alt="profile"
-              />
+              <div
+                role="button"
+                onClick={goToBlogs}
+                onKeyPress={goToBlogs}
+                tabIndex={0}
+                className="image-wrapper"
+              >
+                <img
+                  className="profile-image"
+                  src="https://miro.medium.com/fit/c/48/48/0*74rUDAu4TpM5U-mo."
+                  alt="profile"
+                />
+              </div>
               <div className="ml-one blog-author">
-                <a
-                  href="https://twitter.com/TheTechRally"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Button style={{ paddingLeft: 0 }}color="link" onClick={goToBlogs}>
                   Alexander Lee
-                </a>
+                </Button>
                 <p style={{ marginBottom: 0 }}>{date}</p>
               </div>
             </div>
@@ -59,6 +69,9 @@ function BlogsDetailPage (props) {
           </Col>
         </Row>
         <style jsx>{`
+          .image-wrapper {
+            cursor: pointer;
+          }
           .blog-author {
             display: flex;
             flex-direction: column;

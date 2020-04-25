@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Head from 'next/head';
 
@@ -7,7 +8,7 @@ import { UserProvider } from 'utils/user';
 const Layout = ({ user, loading = false, children }) => (
   <UserProvider value={{ user, loading }}>
       <Head>
-        <title>Thoughts!</title>
+        <title>techrally.me</title>
       </Head>
 
     <HeaderNav />

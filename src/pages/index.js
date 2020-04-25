@@ -40,11 +40,11 @@ const Index = (props) => {
               </div>
               {
                 isMdLayout ?
-                <Button color="primary" size="lg">
-                  Browse My Courses
+                <Button color="primary" size="lg" style={{ cursor: 'default' }}>
+                  Browse My Courses (Coming Soon)
                 </Button> :
                 <div className={styles.mobileSectionBrowse}>
-                  <Button color="primary">Browse My Courses</Button>
+                  <Button color="primary" style={{ cursor: 'default' }}>Browse My Courses (Coming Soon)</Button>
                 </div>
 
               }
@@ -115,7 +115,7 @@ const Index = (props) => {
             <Col xs={12}>
               <div>
                 <h1 className={styles.contactText}>
-                  Contact
+                  Contact Us
                 </h1>
                 <hr className="divider divider--xsmall" />
                 <h4
@@ -129,11 +129,11 @@ const Index = (props) => {
               </div>
               {
                 isMdLayout ?
-                <Button color="primary" size="lg">
-                  Browse My Courses
+                <Button color="primary" size="lg" style={{ cursor: 'default' }}>
+                  Browse My Courses (Coming Soon)
                 </Button> :
                 <div className={styles.mobileSectionBrowse}>
-                  <Button color="primary">Browse My Courses</Button>
+                  <Button color="primary" style={{ cursor: 'default' }}>Browse My Courses (Coming Soon)</Button>
                 </div>
 
               }

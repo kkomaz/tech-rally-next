@@ -19,7 +19,6 @@ import { useRouter } from 'next/router'
 
 // TODO: Add validations
 function BlogForm (props) {
-  // eslint-disable-next-line react/destructuring-assignment
   const [description, setDescription] = useState(() => props.description || '');
   const { initialValues, type, id, token, imageKey } = props;
   const router = useRouter()

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
@@ -16,7 +17,7 @@ const Paging = ({ perPage, length, paginate, className }) => {
       </PaginationItem>
       {
         pageNumbers.map(number => (
-        <PaginationItem onClick={() => paginate(number)}>
+        <PaginationItem onClick={() => paginate(number)} key={number}>
           <PaginationLink href="#">
             {number}
           </PaginationLink>
