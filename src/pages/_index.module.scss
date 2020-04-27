@@ -78,6 +78,10 @@
 }
 
 // Contact Info
+.contact {
+  display: flex;
+  justify-content: center;
+}
 .contactText {
   text-align: center;
 }

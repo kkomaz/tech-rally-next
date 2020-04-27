@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import { BlogCard } from 'components/Blog';
 import Layout from 'components/Layout';
+import ContactForm from 'components/Contact/ContactForm';
 import { useFetchUser } from '../utils/user';
 
 import landPageSvg from '../assets/svg/landing-page-section.svg';
@@ -113,33 +114,15 @@ const Index = (props) => {
         <div className="container">
           <Row>
             <Col xs={12}>
-              <div>
-                <h1 className={styles.contactText}>
-                  Contact Us
-                </h1>
-                <hr className="divider divider--xsmall" />
-                <h4
-                  className={cx({
-                    sectionSecondaryText: true,
-                    'mb-one': true,
-                  })}
-                >
-                  Learning how to code has never been easier.
-                </h4>
-              </div>
-              {
-                isMdLayout ?
-                <Button color="primary" size="lg" style={{ cursor: 'default' }}>
-                  Browse My Courses (Coming Soon)
-                </Button> :
-                <div className={styles.mobileSectionBrowse}>
-                  <Button color="primary" style={{ cursor: 'default' }}>Browse My Courses (Coming Soon)</Button>
-                </div>
+              <h1 className={styles.contactText}>
+                Contact
+              </h1>
 
-              }
-            </Col>
-            <Col xs={{ size: 12, order: 1 }} md={{ size: 6, order: 2 }}>
-              <img className={styles.sectionImage} alt="img" src={landPageSvg} />
+              <hr className="divider divider--xsmall" />
+
+              <div className={styles.contact}>
+                <ContactForm />
+              </div>
             </Col>
           </Row>
         </div>
