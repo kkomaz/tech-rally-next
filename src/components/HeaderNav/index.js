@@ -34,33 +34,10 @@ const HeaderNav = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem className="mr-one">
-              <Link href="/products">
-              <NavLink>Courses</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem className="mr-one">
               <Link href="/blogs">
               <NavLink>Blogs</NavLink>
               </Link>
             </NavItem>
-            {
-              !loading &&
-              (
-                user ? (
-                  <NavItem className="mr-one">
-                    <Link href="/api/logout">
-                    <NavLink>Sign Out</NavLink>
-                    </Link>
-                  </NavItem>
-                ) : (
-                  <NavItem className="mr-one">
-                    <Link href="/api/login">
-                    <NavLink>Sign In</NavLink>
-                    </Link>
-                  </NavItem>
-                )
-              )
-            }
           </Nav>
         </Collapse>
       </Navbar>

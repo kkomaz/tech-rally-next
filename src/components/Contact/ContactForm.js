@@ -103,6 +103,7 @@ function ContactForm () {
         />
         <p className={styles.title}>I love to hear from you!</p>
         <p className={styles.title}>Please drop me a line if you have any questions</p>
+        <p className="italicized small">Please note - Your email will be saved for upcoming newsletters related to techrally.me</p>
       </div>
       <Formik
         initialValues={{
