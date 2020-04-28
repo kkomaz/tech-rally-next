@@ -30,6 +30,11 @@ body {
   position: relative;
 }
 
+// Move this later
+.alert-dismissible .close {
+  padding: 0.5rem;
+}
+
 .main-container {
  min-height: 100vh; /* will cover the 100% of viewport */
  overflow: hidden;

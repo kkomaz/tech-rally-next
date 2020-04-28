@@ -1,9 +1,11 @@
-import React from 'react';
-import { Card, FormFeedback, FormGroup, Input, Label, Button } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, FormFeedback, FormGroup, Input, Label, Button, Alert } from 'reactstrap';
 import { Formik, Field, Form } from 'formik';
 import classNames from 'classnames/bind';
 import { FaLocationArrow } from 'react-icons/fa';
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
+import axios from 'axios';
+import config from 'utils/config';
 
 import styles from './_contact-form.module.scss';
 
@@ -11,6 +13,10 @@ const cx = classNames.bind(styles);
 
 function ContactForm () {
   const { isMdLayout } = useResponsiveLayout();
+  const [status, setStatus] = useState({
+    type: '',
+    visible: false,
+  })
 
   const validate = (values) => {
     const errors = {};
@@ -32,9 +38,37 @@ function ContactForm () {
     return errors;
   };
 
-  const onSubmit = (values, options) => {
-    console.log(values);
+  const onSubmit = async (values, options) => {
+    const { email, name, message } = values;
+
+    try {
+      const result = await axios.post(`${config.API_URL}/email/send-contact`, {
+        email,
+        name,
+        message,
+      });
+
+      if (result.data.success) {
+        setStatus({
+          type: 'success',
+          visible: true,
+        });
+        options.resetForm();
+      }
+    } catch (e) {
+      setStatus({
+        type: 'danger',
+        visible: true,
+      });
+    }
   };
+
+  const onDismiss = () => {
+    setStatus({
+      type: '',
+      visible: false,
+    })
+  }
 
   return (
     <Card
@@ -42,6 +76,24 @@ function ContactForm () {
         card: isMdLayout,
       })}
     >
+      <Alert color={status.type} isOpen={status.visible} toggle={onDismiss}>
+        {
+          status.type === 'success' && <div>Thanks for the message!  Talk to you soon :)</div>
+        }
+        {
+          status.type === 'danger' &&
+          <div>
+            Something went wrong! Feel free to send me a message on&nbsp;
+            <a
+              href="https://twitter.com/TheTechRally"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              twitter
+            </a>
+          </div>
+        }
+      </Alert>
       <div className={styles.titleWrapper}>
         <img
           className="mb-one"
@@ -56,6 +108,7 @@ function ContactForm () {
         initialValues={{
           name: '',
           email: '',
+          message: '',
         }}
         validate={validate}
         onSubmit={onSubmit}
