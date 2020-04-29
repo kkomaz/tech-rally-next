@@ -3,6 +3,7 @@ import { Card, FormFeedback, FormGroup, Input, Label, Button, Alert } from 'reac
 import { Formik, Field, Form } from 'formik';
 import classNames from 'classnames/bind';
 import { FaLocationArrow } from 'react-icons/fa';
+import { FiMail } from "react-icons/fi";
 import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import axios from 'axios';
 import config from 'utils/config';
@@ -39,13 +40,14 @@ function ContactForm () {
   };
 
   const onSubmit = async (values, options) => {
-    const { email, name, message } = values;
+    const { email, name, message, mailing } = values;
 
     try {
       const result = await axios.post(`${config.API_URL}/email/send-contact`, {
         email,
         name,
         message,
+        mailing,
       });
 
       if (result.data.success) {
@@ -103,7 +105,6 @@ function ContactForm () {
         />
         <p className={styles.title}>I love to hear from you!</p>
         <p className={styles.title}>Please drop me a line if you have any questions</p>
-        <p className="italicized small">Please note - Your email will be saved for upcoming newsletters related to techrally.me</p>
       </div>
       <Formik
         initialValues={{
@@ -158,6 +159,17 @@ function ContactForm () {
                   rows={10}
                 />
                 <FormFeedback>{errors.message}</FormFeedback>
+              </FormGroup>
+              <FormGroup className="mb-one" check inline>
+                <Label check>
+                  <Input
+                    type="checkbox"
+                    bsSize="md"
+                    tag={Field}
+                    name="mailing"
+                    disabled={isSubmitting}
+                  /> Join my mailing list? <FiMail size="1.5em" className="ml-quarter" />
+                </Label>
               </FormGroup>
               <FormGroup>
                 <Button
