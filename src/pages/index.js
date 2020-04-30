@@ -8,6 +8,7 @@ import useResponsiveLayout from 'utils/responsive/useResponsiveLayout';
 import { BlogCard } from 'components/Blog';
 import Layout from 'components/Layout';
 import ContactForm from 'components/Contact/ContactForm';
+import { FaYoutube } from "react-icons/fa";
 import { useFetchUser } from '../utils/user';
 
 import landPageSvg from '../assets/svg/landing-page-section.svg';
@@ -18,7 +19,7 @@ const cx = classNames.bind(styles);
 const Index = (props) => {
   const { isMdLayout } = useResponsiveLayout();
   const { blogs } = props;
-   const { user } = useFetchUser();
+  const { user } = useFetchUser();
 
   return (
     <Layout user={user}>
@@ -40,12 +41,29 @@ const Index = (props) => {
                 </h4>
               </div>
               {
-                isMdLayout ?
-                <Button color="primary" size="lg" style={{ cursor: 'default' }}>
-                  Browse My Courses (Coming Soon)
-                </Button> :
+                isMdLayout ? (
+                  <Button color="primary" size="lg">
+                    <a
+                      href="https://www.youtube.com/c/techrally"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: 'white', textDecoration: 'none' }}
+                    >
+                      View my Youtube Channel <FaYoutube size="1.5em" style={{ marginBottom: '1px' }} />
+                    </a>
+                  </Button>
+                ) :
                 <div className={styles.mobileSectionBrowse}>
-                  <Button color="primary" style={{ cursor: 'default' }}>Browse My Courses (Coming Soon)</Button>
+                  <Button color="primary">
+                    <a
+                      href="https://www.youtube.com/c/techrally"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: 'white', textDecoration: 'none' }}
+                    >
+                      View my Youtube Channel <FaYoutube size="1.5em" style={{ marginBottom: '1px' }} />
+                    </a>
+                  </Button>
                 </div>
 
               }
