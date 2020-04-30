@@ -33,10 +33,27 @@ const HeaderNav = () => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem className="mr-one">
+            <NavItem className="mr-half">
+              <Link href="/about">
+                <NavLink>
+                  About
+                </NavLink>
+              </Link>
+            </NavItem>
+            <NavItem className="mr-half">
               <Link href="/blogs">
               <NavLink>Blogs</NavLink>
               </Link>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="https://www.youtube.com/c/techrally"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                Youtube
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
