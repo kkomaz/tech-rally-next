@@ -86,7 +86,7 @@ const Index = (props) => {
                       bold: true,
                     })}
                   >
-                    <span role="img" aria-label="book">📚</span> My Blogs <span role="img" aria-label="book">📚</span>
+                    My Blogs
                   </h1>
                   <Link href="/blogs">
                     <Button color="link" className={styles.showAllButton}>
@@ -102,7 +102,7 @@ const Index = (props) => {
                       bold: true,
                     })}
                   >
-                    <span role="img" aria-label="book">📚</span> My Blogs <span role="img" aria-label="book">📚</span>
+                    My Blogs
                   </h4>
                   <Link href="/blogs">
                     <Button color="link" className={styles.showAllButton}>
