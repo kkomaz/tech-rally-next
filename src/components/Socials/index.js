@@ -71,7 +71,7 @@ function Socials (props) {
       {
         !hideFb &&
         <a
-          href="https://www.facebook.com/groups/811715242683243"
+          href="http://facebook.com/groups/softwaredevlounge"
           target="_blank"
           rel="noopener noreferrer"
           style={{

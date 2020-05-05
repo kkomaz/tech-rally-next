@@ -28,7 +28,7 @@ function CommunityBanner () {
         style={{ width: '100%' }}
         size="lg"
         color="primary"
-        onClick={() => window.open('https://www.facebook.com/groups/811715242683243')}
+        onClick={() => window.open('http://facebook.com/groups/softwaredevlounge')}
       >
         Join Now!
         <FaFacebook className="ml-quarter mb-quarter" />
