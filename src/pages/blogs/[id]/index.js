@@ -112,10 +112,7 @@ export const getStaticPaths = async () => {
 
   const paths = data.map((blog) => ({
     params: {
-      id: `${blog.title
-        .toLowerCase()
-        .split(' ')
-        .join('-')}-${blog._id}`,
+      id: `${blog.slug}-${blog._id}`,
     },
   }));
 

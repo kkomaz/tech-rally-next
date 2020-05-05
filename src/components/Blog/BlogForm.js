@@ -186,7 +186,7 @@ BlogForm.propTypes = {
   onSubmitSuccess: PropTypes.func,
   token: PropTypes.string.isRequired,
   type: PropTypes.string,
-  imageKey: PropTypes.string.isRequired,
+  imageKey: PropTypes.string,
 };
 
 BlogForm.defaultProps = {
@@ -200,6 +200,7 @@ BlogForm.defaultProps = {
   description: '',
   id: '',
   type: 'create',
+  imageKey: '',
 };
 
 export default BlogForm;

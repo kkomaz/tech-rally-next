@@ -46,18 +46,17 @@ function BlogsPage(props) {
                   )
                 })
               }
+              <Paging
+                className={styles.pagingWrapper}
+                perPage={blogsPerPage}
+                length={blogs.length}
+                paginate={paginate}
+              />
             </Row>
           </Col>
           <Col xs={12} md={3}>
             <CommunityBanner />
           </Col>
-
-          <Paging
-            className={styles.pagingWrapper}
-            perPage={blogsPerPage}
-            length={blogs.length}
-            paginate={paginate}
-          />
         </Row>
       </div>
     </Layout>

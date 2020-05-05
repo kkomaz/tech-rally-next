@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 function BlogCard (props) {
   const {
-    blog: { _id, title, image_url, sub_title, created_at },
+    blog: { _id, title, image_url, sub_title, created_at, slug },
   } = props;
 
   const router = useRouter();
@@ -26,10 +26,7 @@ function BlogCard (props) {
     if (!user) {
       router.push(
         `/blogs/[${_id}]`,
-        `/blogs/${title
-          .toLowerCase()
-          .split(' ')
-          .join('-')}-${_id}`
+        `/blogs/${slug}-${_id}`
       );
     }
   };
@@ -50,10 +47,7 @@ function BlogCard (props) {
           <div className="mt-half">
             <Link
               href={`blogs/[${_id}]`}
-              as={`blogs/${title
-                .toLowerCase()
-                .split(' ')
-                .join('-')}-${_id}`}
+              as={`blogs/${slug}-${_id}`}
             >
               <Button color="primary" className="mr-half">
                 Show
@@ -77,6 +71,7 @@ BlogCard.propTypes = {
     image_url: PropTypes.string.isRequired,
     sub_title: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
   }).isRequired,
 }
 
